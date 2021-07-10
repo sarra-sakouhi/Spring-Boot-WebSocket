@@ -115,7 +115,31 @@ button.accent {
     text-align: center;
 }
 
+#chaine-page {
+    text-align: center;
+}
+
 .username-page-container {
+    background: #fff;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    border-radius: 2px;
+    width: 100%;
+    max-width: 500px;
+    display: inline-block;
+    margin-top: 42px;
+    vertical-align: middle;
+    position: relative;
+    padding: 35px 55px 35px;
+    min-height: 250px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    margin-top: -160px;
+}
+
+.chaine-page-container {
     background: #fff;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     border-radius: 2px;
@@ -139,6 +163,9 @@ button.accent {
     margin-top: 10px;
 }
 
+.chaine-page-container .chaine-submit {
+    margin-top: 10px;
+}
 
 #chat-page {
     position: relative;
@@ -278,6 +305,13 @@ button.accent {
         margin-right: 15px;
         padding: 25px;
     }
+    
+    .chaine-page-container {
+        width: auto;
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 25px;
+    }
 
     #chat-page ul {
         height: calc(100% - 120px);
@@ -302,4 +336,9 @@ button.accent {
     .chat-header h2 {
         font-size: 1.1em;
     }
+    
+    .disabledbutton {
+    pointer-events: none;
+    opacity: 0.4;
+}
 }

@@ -60,11 +60,4 @@ public class MessageController {
 		return ResponseEntity.ok(response);
 
 	}
-	
-	//Mail
-	@GetMapping("/sendMailTest")
-	public void sendMailTest(){
-		messageService.sendMailTest();
-		System.out.printf("Mail Test envoyé !");
-	}
 }

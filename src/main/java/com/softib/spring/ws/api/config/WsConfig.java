@@ -14,10 +14,10 @@ public class WsConfig implements WebSocketMessageBrokerConfigurer{
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint("/softib").withSockJS();
 	}
-	
+		
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
-		registry.enableSimpleBroker("/topic");
-		registry.setApplicationDestinationPrefixes("/app");
+		registry.enableSimpleBroker("/topic", "/queue");
+		registry.setApplicationDestinationPrefixes("/");
 	}
 }

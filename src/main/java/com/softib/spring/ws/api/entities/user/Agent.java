@@ -6,9 +6,11 @@ import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+@Data
 @Entity
 @Getter
 @Setter

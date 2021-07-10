@@ -4,6 +4,10 @@ package com.softib.spring.ws.api.entities.user;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +21,9 @@ public class Role {
 	private Long id;
 	private String titre;
 	private boolean active;
+	
+	@ManyToOne
+    @JsonBackReference
+    private Utilisateur user;
 
 }

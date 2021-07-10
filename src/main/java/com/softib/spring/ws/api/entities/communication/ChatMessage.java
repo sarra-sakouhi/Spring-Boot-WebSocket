@@ -12,12 +12,7 @@ import lombok.Setter;
 @DiscriminatorValue("CHAT")
 public class ChatMessage extends Message{
 	private boolean vu;
-	private MessageType type;
+	private ChatType type;
 	private String chaine;
-
-
-	public enum MessageType {
-        CHAT, JOIN, LEAVE
-    }
 
 }

@@ -1,8 +1,13 @@
 package com.softib.spring.ws.api.services.communication;
 
+import java.util.Calendar;
 import java.util.List;
 
+import org.alicebot.ab.Bot;
+import org.alicebot.ab.Chat;
+import org.alicebot.ab.configuration.BotConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.softib.spring.ws.api.entities.communication.ChatMessage;
@@ -25,6 +30,7 @@ public class ChatMessageService implements IChatMessageService {
 
 	public ChatMessage createChatMessage(ChatMessage chatMessage) {
 
+	chatMessage.setDate(Calendar.getInstance().getTime());
 	return chatMessageRepository.save(chatMessage);
 
 	}
@@ -39,7 +45,15 @@ public class ChatMessageService implements IChatMessageService {
 
 		ChatMessage chatMessage = chatMessageRepository.findById(id)
 				.orElseThrow(() -> new RessourceNotFoundException(RESSOURCE_NOT_FOUND_MSG + id));
-
+		
+		chatMessage.setContent(chatMessageWithUpdates.getContent());
+		chatMessage.setSender(chatMessageWithUpdates.getSender());
+		chatMessage.setRecievers(chatMessageWithUpdates.getRecievers());
+		chatMessage.setDate(Calendar.getInstance().getTime());
+		chatMessage.setType(chatMessageWithUpdates.getType());
+		chatMessage.setVu(chatMessageWithUpdates.isVu());
+		chatMessage.setChaine(chatMessageWithUpdates.getChaine());
+		
 		ChatMessage updatedChatMessage = chatMessageRepository.save(chatMessage);
 		return updatedChatMessage;
 	}
@@ -51,5 +65,19 @@ public class ChatMessageService implements IChatMessageService {
 
 	chatMessageRepository.delete(chatMessage);
 
+	}
+
+	@Bean
+	public Bot alice() {
+	    return new Bot(BotConfiguration.builder()
+	           .name("alice")
+	            .path("src/main/resources")
+	            .build()
+	   );
+	}
+	private final Chat chatSession = new Chat(alice(), false);
+
+	public String botAnswer(String message) {
+		return chatSession.multisentenceRespond(message);
 	}
 }

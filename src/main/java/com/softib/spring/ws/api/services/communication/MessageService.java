@@ -43,6 +43,11 @@ public class MessageService implements IMessageService{
 		Message message = messageRepository.findById(id)
 				.orElseThrow(() -> new RessourceNotFoundException(RESSOURCE_NOT_FOUND_MSG + id));
 
+		message.setContent(messageWithUpdates.getContent());
+		message.setSender(messageWithUpdates.getSender());
+		message.setRecievers(messageWithUpdates.getRecievers());
+		message.setDate(messageWithUpdates.getDate());
+		
 		Message updatedMessage = messageRepository.save(message);
 		return updatedMessage;
 	}
@@ -56,41 +61,6 @@ public class MessageService implements IMessageService{
 
 	}
 	
-	//Mail
-	@Autowired
-    private JavaMailSender mailSender;
-	
-	public void sendMail(Mail mail) {
-		String from = mail.getEmetteur().getEmail();
-		String to = mail.getUtilisateursCible().get(0).getEmail();
-		 
-		SimpleMailMessage message = new SimpleMailMessage();
-		 
-		message.setFrom(from);
-		message.setTo(to);
-		message.setSubject(mail.getObjet());
-		message.setText(mail.getMessage());
-		 
-		mailSender.send(message);
-	}
 	
 	
-	//Mail test---------------------------------------------------------------------
-	
-	@Autowired
-	private Environment env;
-	
-	public void sendMailTest() {
-		String from = env.getProperty("spring.mail.username");
-		String to = "achref.gomri@wooden.tn";
-		 
-		SimpleMailMessage message = new SimpleMailMessage();
-		 
-		message.setFrom(from);
-		message.setTo(to);
-		message.setSubject("Message from heart");
-		message.setText("Love you <3.");
-		 
-		mailSender.send(message);
-	}
 }
